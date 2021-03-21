@@ -17,7 +17,8 @@ if __name__ == '__main__':
     pp_format = 'jpg'  # 'jpg' or 'nii'
     pp_folder_name = {'mr': {'train': 'trainA', 'test': 'testA'}, 'ct': {'train': 'trainB', 'test': 'testB'}}
     dataset_name_list = ['AVN', 'NMDID']
-    dataset_path_dict = {'AVN': '../dataset/AVN/', 'NMDID': '../dataset/NMDID/'}
+    parent_dir = os.path.abspath(__file__ + "/../../../")
+    dataset_path_dict = {'AVN': parent_dir + '/dataset/AVN/', 'NMDID': parent_dir + '/dataset/NMDID/'}
     modality_filename_dict = {'ct': 'CT.nii', 'mr': 'MR_T1.nii', 'xray':'Xray.mhd'}
 
     patient_dict = {}    # Dictionary of patient volumes ('mr' and 'ct')
@@ -25,8 +26,7 @@ if __name__ == '__main__':
     slice_center_dict = {}   # Dictionary of slice center (femur bone location) along the sagittal axis ('1/2', '2/3')
     test_dict = {}  # Dictionary of test volumes (specify volumes to be used as test sets, could be left empty)
 
-    main_path = '../'
-    result_path = main_path + 'result/'
+    result_path = parent_dir + '/result/'
 
     if 'AVN' in dataset_name_list:
 
@@ -69,11 +69,10 @@ if __name__ == '__main__':
     for dataset_name, dataset_info in patient_dict.items():
 
       # Get dataset path
-      dataset_path = main_path + dataset_path_dict[dataset_name]
+      dataset_path = dataset_path_dict[dataset_name]
       for m, patient_id_list in dataset_info.items():
         for patient_id in patient_id_list:
           cur_path = os.path.join(dataset_path, patient_id)
-          #print(os.path.join(cur_path, modality_filename_dict[m]))
           img_path = glob.glob(os.path.join(cur_path, modality_filename_dict[m]))[0]
           #print(dataset_name + '_' + patient_id)
           vol_range, slice_center = util.get_vol_info(vol_range_dict, slice_center_dict, dataset_name, m, patient_id)
