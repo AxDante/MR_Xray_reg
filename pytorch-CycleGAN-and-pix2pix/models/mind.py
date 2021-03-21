@@ -4,31 +4,38 @@ import math
 
 class MIND(torch.nn.Module):
 
-    def __init__(self, non_local_region_size =9, patch_size =7, neighbor_size =3, gaussian_patch_sigma =3.0):
+    def __init__(self, non_local_region_size =9, patch_size =7, neighbor_size =3, gaussian_patch_sigma =3.0, gpu_ids = []):
         super(MIND, self).__init__()
         self.nl_size =non_local_region_size
         self.p_size =patch_size
         self.n_size =neighbor_size
         self.sigma2 =gaussian_patch_sigma *gaussian_patch_sigma
 
+        if len(gpu_ids) > 0:
+            assert (torch.cuda.is_available())
+            use_gpu = True
+        else:
+            use_gpu = False
 
         # calc shifted images in non local region
-        self.image_shifter =torch.nn.Conv2d(in_channels =1, out_channels =self.nl_size *self.nl_size,
+        self.image_shifter = torch.nn.Conv2d(in_channels =1, out_channels =self.nl_size *self.nl_size,
                                             kernel_size =(self.nl_size, self.nl_size),
                                             stride=1, padding=((self.nl_size-1)//2, (self.nl_size-1)//2),
                                             dilation=1, groups=1, bias=False, padding_mode='zeros')
+        if use_gpu: self.image_shifter = self.image_shifter.to(gpu_ids[0])
 
         for i in range(self.nl_size*self.nl_size):
             t =torch.zeros((1, self.nl_size, self.nl_size))
             t[0, i%self.nl_size, i//self.nl_size] =1
             self.image_shifter.weight.data[i] =t
 
-
         # patch summation
         self.summation_patcher =torch.nn.Conv2d(in_channels =self.nl_size*self.nl_size, out_channels =self.nl_size*self.nl_size,
                                               kernel_size =(self.p_size, self.p_size),
                                               stride=1, padding=((self.p_size-1)//2, (self.p_size-1)//2),
                                               dilation=1, groups=self.nl_size*self.nl_size, bias=False, padding_mode='zeros')
+        if use_gpu: self.summation_patcher = self.summation_patcher.to(gpu_ids[0])
+
 
         for i in range(self.nl_size*self.nl_size):
             # gaussian kernel
@@ -61,6 +68,8 @@ class MIND(torch.nn.Module):
                                                kernel_size =(self.p_size, self.p_size),
                                                stride=1, padding=((self.p_size-1)//2, (self.p_size-1)//2),
                                                dilation=1, groups=self.n_size*self.n_size, bias=False, padding_mode='zeros')
+        if use_gpu: self.neighbor_summation_patcher = self.neighbor_summation_patcher.to(gpu_ids[0])
+
 
         for i in range(self.n_size*self.n_size):
             t =torch.ones((1, self.p_size, self.p_size))
@@ -97,13 +106,14 @@ class MIND(torch.nn.Module):
 
 class MINDLoss(torch.nn.Module):
 
-    def __init__(self, non_local_region_size =9, patch_size =7, neighbor_size =3, gaussian_patch_sigma =3.0):
+    def __init__(self, non_local_region_size =9, patch_size =7, neighbor_size =3, gaussian_patch_sigma =3.0, gpu_ids = []):
         super(MINDLoss, self).__init__()
         self.nl_size =non_local_region_size
         self.MIND =MIND(non_local_region_size =non_local_region_size,
                         patch_size =patch_size,
                         neighbor_size =neighbor_size,
-                        gaussian_patch_sigma =gaussian_patch_sigma)
+                        gaussian_patch_sigma =gaussian_patch_sigma,
+                        gpu_ids =gpu_ids)
 
     def forward(self, input, target):
         in_mind =self.MIND(input)

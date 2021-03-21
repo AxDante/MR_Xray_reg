@@ -161,6 +161,8 @@ class CycleGANModel(BaseModel):
             # G_A should be identity if real_B is fed: ||G_A(B) - B||
             self.idt_A = self.netG_A(self.real_B)
             self.loss_idt_A = self.criterionIdt(self.idt_A, self.real_B) * lambda_B * lambda_idt
+            print('asda')
+            print(self.loss_idt_A.type)
             # G_B should be identity if real_A is fed: ||G_B(A) - A||
             self.idt_B = self.netG_B(self.real_A)
             self.loss_idt_B = self.criterionIdt(self.idt_B, self.real_A) * lambda_A * lambda_idt
@@ -170,12 +172,14 @@ class CycleGANModel(BaseModel):
 
 
         if lambda_mind > 0:
-            lmA = mind.MINDLoss()
-            lmB = mind.MINDLoss()
-            self.mind_A = self.netG_A(self.real_B)
-            self.loss_mind_A = lmA.forward(self.idt_A, self.real_B) * lambda_B * lambda_mind
-            self.mind_B = self.netG_B(self.real_A)
-            self.loss_mind_B = lmB.forward(self.idt_B, self.real_A) * lambda_A * lambda_mind
+            lmA = mind.MINDLoss(gpu_ids=self.gpu_ids)
+            lmB = mind.MINDLoss(gpu_ids=self.gpu_ids)
+            self.mind_A = self.netG_A(self.real_B).permute(1,0,2,3)
+            print(self.mind_A.type)
+            print( lmA.forward(self.mind_A, self.real_B.permute(1,0,2,3)).type)
+            self.loss_mind_A = lmA.forward(self.mind_A, self.real_B.permute(1,0,2,3)) * lambda_B * lambda_mind
+            self.mind_B = self.netG_B(self.real_A).permute(1,0,2,3)
+            self.loss_mind_B = lmB.forward(self.mind_B, self.real_A.permute(1,0,2,3)) * lambda_A * lambda_mind
         else:
             self.loss_mind_A = 0
             self.loss_mind_B = 0
