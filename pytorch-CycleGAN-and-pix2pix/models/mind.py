@@ -56,6 +56,9 @@ class MIND(torch.nn.Module):
                                         kernel_size =(self.n_size, self.n_size),
                                         stride=1, padding=((self.n_size-1)//2, (self.n_size-1)//2),
                                         dilation=1, groups=1, bias=False, padding_mode='zeros')
+        if use_gpu: self.neighbors = self.neighbors.to(gpu_ids[0])
+
+
 
         for i in range(self.n_size*self.n_size):
             t =torch.zeros((1, self.n_size, self.n_size))
@@ -83,6 +86,7 @@ class MIND(torch.nn.Module):
 
         # get original image channel stack
         orig_stack =torch.stack([orig.squeeze(dim=1) for i in range(self.nl_size*self.nl_size)], dim=1)
+
 
         # get shifted images
         shifted =self.image_shifter(orig)
@@ -119,5 +123,5 @@ class MINDLoss(torch.nn.Module):
         in_mind =self.MIND(input)
         tar_mind =self.MIND(target)
         mind_diff =in_mind -tar_mind
-        l1 =torch.norm( mind_diff, 1)
+        l1 = torch.norm( mind_diff, 1)
         return l1/(input.shape[2] *input.shape[3] *self.nl_size *self.nl_size)

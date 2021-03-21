@@ -41,7 +41,7 @@ class CycleGANModel(BaseModel):
             parser.add_argument('--lambda_A', type=float, default=10.0, help='weight for cycle loss (A -> B -> A)')
             parser.add_argument('--lambda_B', type=float, default=10.0, help='weight for cycle loss (B -> A -> B)')
             parser.add_argument('--lambda_identity', type=float, default=0.5, help='use identity mapping. Setting lambda_identity other than 0 has an effect of scaling the weight of the identity mapping loss. For example, if the weight of the identity loss should be 10 times smaller than the weight of the reconstruction loss, please set lambda_identity = 0.1')
-            parser.add_argument('--lambda_mind', type=float, default=0.5, help='MIND')
+            parser.add_argument('--lambda_mind', type=float, default=5.0, help='MIND')
 
         return parser
 
@@ -161,8 +161,6 @@ class CycleGANModel(BaseModel):
             # G_A should be identity if real_B is fed: ||G_A(B) - B||
             self.idt_A = self.netG_A(self.real_B)
             self.loss_idt_A = self.criterionIdt(self.idt_A, self.real_B) * lambda_B * lambda_idt
-            print('asda')
-            print(self.loss_idt_A.type)
             # G_B should be identity if real_A is fed: ||G_B(A) - A||
             self.idt_B = self.netG_B(self.real_A)
             self.loss_idt_B = self.criterionIdt(self.idt_B, self.real_A) * lambda_A * lambda_idt
@@ -172,14 +170,12 @@ class CycleGANModel(BaseModel):
 
 
         if lambda_mind > 0:
-            lmA = mind.MINDLoss(gpu_ids=self.gpu_ids)
-            lmB = mind.MINDLoss(gpu_ids=self.gpu_ids)
+            lmA = mind.MINDLoss(gpu_ids=[])
+            lmB = mind.MINDLoss(gpu_ids=[])
             self.mind_A = self.netG_A(self.real_B).permute(1,0,2,3)
-            print(self.mind_A.type)
-            print( lmA.forward(self.mind_A, self.real_B.permute(1,0,2,3)).type)
-            self.loss_mind_A = lmA.forward(self.mind_A, self.real_B.permute(1,0,2,3)) * lambda_B * lambda_mind
+            self.loss_mind_A = lmA.forward(self.mind_A.cpu(), self.real_B.permute(1,0,2,3).cpu()) * lambda_B * lambda_mind
             self.mind_B = self.netG_B(self.real_A).permute(1,0,2,3)
-            self.loss_mind_B = lmB.forward(self.mind_B, self.real_A.permute(1,0,2,3)) * lambda_A * lambda_mind
+            self.loss_mind_B = lmB.forward(self.mind_B.cpu(), self.real_A.permute(1,0,2,3).cpu()) * lambda_A * lambda_mind
         else:
             self.loss_mind_A = 0
             self.loss_mind_B = 0
@@ -197,8 +193,8 @@ class CycleGANModel(BaseModel):
                       self.loss_idt_A + self.loss_idt_B + self.loss_mind_A + self.loss_mind_B
 
         print('g_a {}; g_b {}; cyc_a {}; cyc_b {}, idt_a {}, idt_b {}, mind_a {}, mind_b {}'.format(
-            self.loss_G_A + self.loss_G_B + self.loss_cycle_A + self.loss_cycle_B +
-            self.loss_idt_A + self.loss_idt_B + self.loss_mind_A + self.loss_mind_B))
+            self.loss_G_A, self.loss_G_B, self.loss_cycle_A, self.loss_cycle_B,
+            self.loss_idt_A, self.loss_idt_B, self.loss_mind_A, self.loss_mind_B))
 
         self.loss_G.backward()
 
