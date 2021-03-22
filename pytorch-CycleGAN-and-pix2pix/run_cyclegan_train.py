@@ -11,8 +11,10 @@ if __name__ == '__main__':
     target_dir = os.path.abspath(__file__ + "/../../../")
     print(target_dir)
     print(os.path.join(target_dir, 'result/AVN_NMDID_thickness_3_format_jpg_date0315'))
+    opt.name = 'AVN_NMDID_thickness_3_format_jpg_date0321'
     opt.dataroot = os.path.join(target_dir, 'result/AVN_NMDID_thickness_3_format_jpg_date0315')
-    opt.name = 'mr2ct_0315_thickness_3'
+    opt.checkpoints_dir = os.path.join(target_dir, 'checkpoints')
+    print('checkpoints directory', opt.checkpoints_dir)
     opt.model = 'cycle_gan'
 
     dataset = create_dataset(opt)  # create a dataset given opt.dataset_mode and other options
