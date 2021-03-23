@@ -1,10 +1,10 @@
 # MR_Xray_reg
 
-(This repository is still under development.)
+**(This repository is still under development.)**
 
 **MSR_MOGA** is a project that mainly aims to perform annotation registration between pre-operative MR images and intra-operative X-rays.
 
-**Prerequisites**
+## Prerequisites
 * Python >= 3.7.0 
 * torch >= 1.5.0
 * CPU or NVIDIA GPU + CUDA CuDNN
