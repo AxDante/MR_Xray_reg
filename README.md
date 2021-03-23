@@ -17,7 +17,7 @@
 ![](./images/moga_model.gif)
 
 ## Setup
-Install and directly run the code under [Processing](https://processing.org/download/).
+
 
 ## Contact
 Feel free to contact me through pku1@jhu.edu if you have any questions.
