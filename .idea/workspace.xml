@@ -2,11 +2,11 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="add0502d-78ce-4744-91f4-3b2bb4bfb5a2" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/requirements.txt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/scripts/run_train_cyclegan" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/scripts/run_validation" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/run_preprocessing" beforeDir="false" afterPath="$PROJECT_DIR$/scripts/run_preprocessing" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/scripts/run_preprocessing" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/scripts/run_preprocessing.sh" beforeDir="false" afterPath="$PROJECT_DIR$/scripts/run_preprocessing.sh" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/scripts/run_train_cyclegan" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/scripts/run_validation" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -68,9 +68,9 @@
       <screen x="65" y="24" width="3775" height="1056" />
     </state>
     <state x="2556" y="302" key="SettingsEditor/65.24.3775.1056@65.24.3775.1056" timestamp="1616995020173" />
-    <state x="2774" y="252" width="1537" height="1142" key="dock-window-1" timestamp="1617003876426">
+    <state x="2530" y="269" width="1537" height="1142" key="dock-window-1" timestamp="1617004299512">
       <screen x="65" y="24" width="3775" height="1056" />
     </state>
-    <state x="2774" y="252" width="1537" height="1142" key="dock-window-1/65.24.3775.1056@65.24.3775.1056" timestamp="1617003876426" />
+    <state x="2530" y="269" width="1537" height="1142" key="dock-window-1/65.24.3775.1056@65.24.3775.1056" timestamp="1617004299512" />
   </component>
 </project>
