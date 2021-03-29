@@ -1,9 +1,7 @@
 # cycleGAN
-conda install pytorch torchvision cudatoolkit=10.2 -c pytorch
-conda install -c conda-forge nibabel
-conda install -c conda-forge dominate
-conda install -c conda-forge visdom
+conda install pytorch torchvision cudatoolkit=10.2 -c pytorch -y
+conda install -c conda-forge nibabel dominate visdom -y
 
 # preprocessing
-conda install -c conda-forge matplotlib
-conda install -c anaconda scikit-learn
+conda install -c conda-forge matplotlib -y
+conda install -c anaconda scikit-learn scikit-image  -y

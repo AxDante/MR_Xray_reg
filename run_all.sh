@@ -1,4 +1,5 @@
-#!/bin/sh
+## WINDOWS SHELL (NOT WORKING RN, NEED ADJUSTMENTS)
 
-echo Begin running preprocessing script
-python ImagePreprocessing/run_pp.py
+#!/usr/bin
+bin/bashecho Begin running preprocessing script
+python ./ImagePreprocessing/run_pp.py
