@@ -14,11 +14,29 @@
 * CPU or NVIDIA GPU + CUDA CuDNN
 
 ## Model Introduction
-![](./images/moga_model.gif)
+ (In progress)
 
-## Installation
-### Setup
-
-
+## How to Use (Linux environment)
+### Installation
+- Run the following pip command to install required packages
+```
+pip install -r ./pytorch-CycleGAN-and-pix2pix/requirements.txt
+```
+### Run
+- Dataset preprocessing script
+```
+chmod +x ./scripts/run_preprocessing.sh
+./scripts/run_preprocessing.sh
+```
+- CycleGAN training script
+```
+chmod +x ./scripts/run_cyclegan.sh
+./scripts/run_cyclegan.sh
+```
+- CycleGAN validation script (In progress)
+```
+chmod +x ./scripts/run_validation.sh
+./scripts/run_validation.sh
+```
 ## Contact
 Feel free to contact me through pku1@jhu.edu if you have any questions.
