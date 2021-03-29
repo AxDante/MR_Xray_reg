@@ -3,10 +3,7 @@
   <component name="ChangeListManager">
     <list default="true" id="add0502d-78ce-4744-91f4-3b2bb4bfb5a2" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/scripts/run_preprocessing" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/scripts/run_preprocessing.sh" beforeDir="false" afterPath="$PROJECT_DIR$/scripts/run_preprocessing.sh" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/scripts/run_train_cyclegan" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/scripts/run_validation" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/requirements.txt" beforeDir="false" afterPath="$PROJECT_DIR$/requirements.txt" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
