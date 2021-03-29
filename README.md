@@ -2,7 +2,7 @@
 
 **(This repository is still under development.)**
 
-**MSR_MOGA** is a project that mainly aims to perform annotation registration between pre-operative MR images and intra-operative X-rays for core decompressing surgery. The packages included in this repository are as follow:
+**MR_Xray_reg** is a project that mainly aims to perform annotation registration between pre-operative MR images and intra-operative X-rays for core decompressing surgery. The packages included in this repository are as follow:
  * ImagePreprocessing
  * ImageSimilarity
  * pytorch-CycleGAN-and-pix2pix (Modified from https://github.com/junyanz/pytorch-CycleGAN-and-pix2pix)
