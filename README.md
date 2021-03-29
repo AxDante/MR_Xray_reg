@@ -20,7 +20,7 @@
 ### Installation
 - Run the following pip command to install required packages
 ```
-pip install -r ./pytorch-CycleGAN-and-pix2pix/requirements.txt
+pip install -r requirements.txt
 ```
 ### Run
 - Dataset preprocessing script
