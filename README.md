@@ -16,7 +16,8 @@
 ## Model Introduction
 ![](./images/moga_model.gif)
 
-## Setup
+## Installation
+### Setup
 
 
 ## Contact
