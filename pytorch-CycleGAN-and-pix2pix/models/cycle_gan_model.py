@@ -193,9 +193,9 @@ class CycleGANModel(BaseModel):
         self.loss_G = self.loss_G_A + self.loss_G_B + self.loss_cycle_A + self.loss_cycle_B + \
                       self.loss_idt_A + self.loss_idt_B + self.loss_mind_A + self.loss_mind_B
 
-        print('g_a {}; g_b {}; cyc_a {}; cyc_b {}, idt_a {}, idt_b {}, mind_a {}, mind_b {}'.format(
-            self.loss_G_A, self.loss_G_B, self.loss_cycle_A, self.loss_cycle_B,
-            self.loss_idt_A, self.loss_idt_B, self.loss_mind_A, self.loss_mind_B))
+        # print('g_a {}; g_b {}; cyc_a {}; cyc_b {}, idt_a {}, idt_b {}, mind_a {}, mind_b {}'.format(
+        #     self.loss_G_A, self.loss_G_B, self.loss_cycle_A, self.loss_cycle_B,
+        #     self.loss_idt_A, self.loss_idt_B, self.loss_mind_A, self.loss_mind_B))
 
         self.loss_G.backward()
 

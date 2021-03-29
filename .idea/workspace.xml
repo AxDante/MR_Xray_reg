@@ -2,8 +2,10 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="add0502d-78ce-4744-91f4-3b2bb4bfb5a2" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/pytorch-CycleGAN-and-pix2pix/test_full_volume.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/requirements.txt" beforeDir="false" afterPath="$PROJECT_DIR$/requirements.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pytorch-CycleGAN-and-pix2pix/models/cycle_gan_model.py" beforeDir="false" afterPath="$PROJECT_DIR$/pytorch-CycleGAN-and-pix2pix/models/cycle_gan_model.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/scripts/run_validation.sh" beforeDir="false" afterPath="$PROJECT_DIR$/scripts/run_validation.sh" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -69,5 +71,9 @@
       <screen x="65" y="24" width="3775" height="1056" />
     </state>
     <state x="2530" y="269" width="1537" height="1142" key="dock-window-1/65.24.3775.1056@65.24.3775.1056" timestamp="1617004299512" />
+    <state x="2361" y="538" width="1359" height="791" key="dock-window-2" timestamp="1617019963570">
+      <screen x="65" y="24" width="3775" height="1056" />
+    </state>
+    <state x="2361" y="538" width="1359" height="791" key="dock-window-2/65.24.3775.1056@65.24.3775.1056" timestamp="1617019963570" />
   </component>
 </project>
