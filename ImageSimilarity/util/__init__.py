@@ -7,6 +7,11 @@ import torch
 import cv2
 import csv
 
+def load_nifti(path):
+    vol_nifty = nib.load(path)
+    vol_np = np.array(vol_nifty.dataobj).transpose(1,0 , 2)
+    return vol_np
+
 def load_image(path):
     if(path[-3:] == 'dng'):
         import rawpy
