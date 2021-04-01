@@ -54,6 +54,9 @@ if __name__ == '__main__':
     # test with eval mode. This only affects layers like batchnorm and dropout.
     # For [pix2pix]: we use batchnorm and dropout in the original pix2pix. You can experiment it with and without eval() mode.
     # For [CycleGAN]: It should not affect CycleGAN as CycleGAN uses instancenorm without dropout.
+
+    print('direction', opt.direction)
+
     if opt.eval:
         model.eval()
     for i, data in enumerate(dataset):
@@ -61,9 +64,13 @@ if __name__ == '__main__':
             break
 
         model.set_input(data)  # unpack data from data loader
-
-
         model.test()           # run inference
+        print('=============')
+        print('real_dataA shape', model.real_A)  # get image data A
+        print('real_dataB shape', model.real_B)
+        print('fake_dataA shape', model.fake_A)  # get image data A
+        print('fake_dataB shape', model.fake_B)
+
         visuals = model.get_current_visuals()  # get image results
         img_path = model.get_image_paths()     # get image paths
         if i % 5 == 0:  # save images to an HTML file

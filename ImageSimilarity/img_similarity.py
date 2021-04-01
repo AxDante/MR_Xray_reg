@@ -11,20 +11,21 @@ import util
 import cv2
 import csv
 import metrics
+import glob
 #from skimage.metrics import structural_similarity
 
 
 if __name__ == '__main__':
     parser = argparse.ArgumentParser(formatter_class=argparse.ArgumentDefaultsHelpFormatter)
-    parser.add_argument('-d0','--dir0', type=str, default='./imgs/test01/ex_dir0')
-    parser.add_argument('-d1','--dir1', type=str, default='./imgs/test01/ex_dir1')
-    parser.add_argument('-dataroot','--dir1', type=str, default='./imgs/test01/ex_dir1')
-    parser.add_argument('-o','--dir_out', type=str, default='./result/test01/')
+    # parser.add_argument('-d0','--dir0', type=str, default='./imgs/test01/ex_dir0')
+    # parser.add_argument('-d1','--dir1', type=str, default='./imgs/test01/ex_dir1')
+    # parser.add_argument('-dataroot','--dir1', type=str, default='./imgs/test01/ex_dir1')
+    # parser.add_argument('-o','--dir_out', type=str, default='./result/test01/')
     parser.add_argument('-v','--version', type=str, default='0.1')
     parser.add_argument('--use_gpu', action='store_true', help='turn on flag to use GPU')
 
-    parser.add_argument('-result_dir', type=str, default='../test_results')
-    parser.add_argument('-name', type=str, default='ex01')
+    parser.add_argument('--result_dir', type=str, default='../test_results')
+    parser.add_argument('--name', type=str, default='ex01')
 
 
     opt = parser.parse_args()
@@ -42,13 +43,14 @@ if __name__ == '__main__':
         real_A_list = glob.glob(img_dir + '*_real_A.png')
         real_B_list = glob.glob(img_dir + '*_real_B.png')
 
-        files = os.listdir(opt.dir0)
+        #files = os.listdir(opt.dir0)
+        #files = os.listdir(opt.dir0)
 
         for real_file in real_A_list:
 
-            fake_file = real_file.replace('real_A', 'fake_B')
+            fake_file = real_file.replace('real_A', 'rec_A')
 
-            if(os.path.exists(os.path.join(opt.dir1,file))):
+            if(os.path.exists(fake_file)):
 
                 f_dict = {fn: '-' for fn in field_names}
                 f_dict['Patient_ID'] = real_file

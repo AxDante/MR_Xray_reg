@@ -19,5 +19,7 @@ class TestOptions(BaseOptions):
         parser.set_defaults(model='test')
         # To avoid cropping, the load_size should be the same as crop_size
         parser.set_defaults(load_size=parser.get_default('crop_size'))
+        # 3D volume testing
+        parser.set_dafaults('--3d_vol', action='store_false', help='whether the testing dataset is 3D')
         self.isTrain = False
         return parser

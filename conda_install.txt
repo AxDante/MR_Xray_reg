@@ -5,3 +5,6 @@ conda install -c conda-forge nibabel dominate visdom -y
 # preprocessing
 conda install -c conda-forge matplotlib -y
 conda install -c anaconda scikit-learn scikit-image  -y
+
+# similarity
+conda install -c conda-forge opencv
